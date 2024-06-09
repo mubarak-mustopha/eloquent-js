@@ -69,7 +69,7 @@ VillageState.random = function(parcelCount = 5){
     for (let turn = 0;;turn++){
         if (state.parcels.length == 0){
             console.log(`Done in ${turn} turns`);
-            break;
+            return turn;
         }
         let action = robot(state, memory);
         state = state.move(action.direction);
