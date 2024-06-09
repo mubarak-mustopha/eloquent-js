@@ -63,6 +63,8 @@ VillageState.random = function(parcelCount = 5){
     return new VillageState("Post Office", parcels);
 }
 
+// run robot
+
  function runRobot(state, robot, memory){
     for (let turn = 0;;turn++){
         if (state.parcels.length == 0){
@@ -76,6 +78,20 @@ VillageState.random = function(parcelCount = 5){
     }
  }
 
+// route robot
+const mailRoute = [
+    "Alice's House", "Cabin", "Alice's House", "Bob's House",
+    "Town Hall", "Daria's House", "Ernie's House",
+    "Grete's House", "Shop", "Grete's House", "Farm",
+    "Marketplace", "Post Office"
+];    
+
+function routeRobot(state, memory){
+    if (memory.length == 0) memory = mailRoute;
+    return {direction: memory[0], memory: memory.slice(1)};
+}
+
+//  random robot
  function randomPick(array) {
     let choice = Math.floor(Math.random() * array.length);
     return array[choice];
@@ -86,7 +102,7 @@ VillageState.random = function(parcelCount = 5){
  }
 
 
- runRobot(VillageState.random(), randomRobot);
+runRobot(VillageState.random(), routeRobot, []);
 
 // let first = new VillageState(
 //     "Post Office",
