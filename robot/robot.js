@@ -127,8 +127,25 @@ function routeRobot(state, memory){
     return {direction: randomPick(roadGraph[state.place])}
  }
 
+//  compare robots
+function compareRobot(robotX, memoryX, robotY, memoryY){
+    let robotXTurns = [];
+    let robotYTurns = [];
+    for (let i = 0; i < 100 ;i++){
+        let state = VillageState.random();
+        robotXTurns.push(runRobot(state,robotX,memoryX));
+        robotYTurns.push(runRobot(state, robotY, memoryY));
+    }
+    function average(array){
+        return array.reduce((x,y) => x + y) / array.length;
+    }
+    console.log(`${robotX.name} finished 100 task taking an average of ${average(robotXTurns)} turns.`);
+    console.log(`${robotY.name} finished 100 task taking an average of ${average(robotYTurns)} turns.`);
+}
 
-runRobot(VillageState.random(parcelCount=25), goalOrientedRobot, []);
+
+compareRobot(goalOrientedRobot, [], routeRobot, []);
+// runRobot(VillageState.random(parcelCount=25), goalOrientedRobot, []);
 
 // let first = new VillageState(
 //     "Post Office",
